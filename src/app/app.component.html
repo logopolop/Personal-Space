@@ -1,0 +1,13 @@
+<button mat-button [matMenuTriggerFor]="loginMenu">Menu</button>
+<mat-menu #loginMenu="matMenu">
+  <button mat-menu-item (click)="navigateTo('home')">Accueil</button>
+  <button mat-menu-item (click)="navigateTo('login')">Se connecter</button>
+</mat-menu>
+
+<button mat-button [matMenuTriggerFor]="contactMenu">Contact</button>
+<mat-menu #contactMenu="matMenu">
+  <button mat-menu-item (click)="navigateTo('contact')">Contacter</button>
+  <button mat-menu-item (click)="navigateTo('location')">Adresse</button>
+</mat-menu>
+
+<router-outlet></router-outlet>
