@@ -1,1 +1,8 @@
-<p>login works!</p>
+<br />
+<div *ngIf="!user">
+    <button mat-raised-button color="warn" (click)="loginWithGoogle()">Se connecter avec Google</button>
+</div>
+
+<div *ngIf="user">
+    <button mat-stroked-button color="warn" (click)="signOut()">Se déconnecter</button>
+</div>

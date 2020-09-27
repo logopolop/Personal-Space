@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { auth, User } from 'firebase';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  result: any;
+  user: User;
+
+  constructor(private afAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
+    this.afAuth.authState.subscribe(user => {
+      this.user = user;
+    })
+  }
+
+  async loginWithGoogle() {
+    try {
+      this.result = await this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  async signOut() {
+    await this.afAuth.signOut();
   }
 
 }
