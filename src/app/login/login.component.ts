@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth, User } from 'firebase';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +10,13 @@ import { auth, User } from 'firebase';
 })
 export class LoginComponent implements OnInit {
 
-  result: any;
+  result;
   user: User;
 
   constructor(private afAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
-    this.afAuth.authState.subscribe(user => {
+    this.afAuth.authState.subscribe((user) => {
       this.user = user;
     })
   }
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
     try {
       this.result = await this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
     } catch (err) {
-      console.error(err);
+      console.error('loginWithGoogle / error : ', err);
     }
   }
 

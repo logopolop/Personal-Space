@@ -1,8 +1,21 @@
-.login {
-    width: 80%;
-    
-    margin: auto;
-    padding-top: 20px;
-
+#login-card {
+    max-width: 250px;
     text-align: center;
+    margin: 5% auto; 
+} 
+
+mat-divider {
+    padding-bottom: 20px;
+}
+
+#account {
+    width: 80%;
+    margin: auto;
+}
+
+#accountHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 50px;
 }

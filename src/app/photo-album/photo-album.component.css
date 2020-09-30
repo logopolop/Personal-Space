@@ -1,0 +1,11 @@
+.uploadPhotoForm {
+    max-width: 300px;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+}
+
+form button {
+    margin: 20px 0;
+    width: 100%;
+}

@@ -1,9 +1,19 @@
-<div class="login">
-    <div *ngIf="!user">
-        <button mat-raised-button color="warn" (click)="loginWithGoogle()">Se connecter avec Google</button>
-    </div>
+<div *ngIf="!user">
+    <mat-card id="login-card" class="mat-elevation-z8">
+        <mat-card-title>Espace Membre</mat-card-title>
+        <mat-divider [inset]="true"></mat-divider>
+        <mat-card-content>
+            <button mat-raised-button color="warn" (click)="loginWithGoogle()">Se connecter avec Google</button>
+        </mat-card-content>
+    </mat-card>
+</div>
 
-    <div *ngIf="user">
-        <button mat-stroked-button color="warn" (click)="signOut()">Se déconnecter</button>
+<div *ngIf="user" id="account">
+    <div id="accountHeader">
+        <h1>Bonjour {{ user.displayName }}</h1>
+        <div>
+            <button mat-stroked-button color="accent" (click)="signOut()">Se déconnecter</button>
+        </div>
     </div>
+    <mat-divider></mat-divider>
 </div>

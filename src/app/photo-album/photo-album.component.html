@@ -1,0 +1,20 @@
+<h3>Album Photo</h3>
+
+<div class="uploadPhotoForm">
+    <form #uploadForm="ngForm" (ngSubmit)="postPhoto()">
+        <mat-form-field>
+            <input type="text" matInput name="title" id="title" [(ngModel)]="photo.title" placeholder="Titre de la photo" required>
+        </mat-form-field><br />
+        <input type="file" name="photoToUpload" id="photoToUpload" (change)="onFileChange($event)" required><br />
+        
+        <button mat-raised-button type="submit" color="primary" [disabled]="!uploadForm.valid || uploadProgress ">Valider</button>
+    </form>
+    
+    <div *ngIf="uploadProgress | async">
+        <mat-progress-bar mode="determinate" [value]="(uploadProgress | async)"></mat-progress-bar>
+    </div>
+    
+    <div *ngIf="photoServerURL | async; let uploadSrc">
+      <a [href]="uploadSrc">Voici la photo que vous venez de mettre en ligne.</a>
+    </div>
+</div>
