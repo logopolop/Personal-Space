@@ -4,6 +4,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { User } from 'firebase';
 import { Subscription } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { DbService } from '../services/db.service';
 
 @Component({
   selector: 'app-photo-album',
@@ -24,11 +25,27 @@ export class PhotoAlbumComponent implements OnInit, OnDestroy {
   uploadedImgURL: any;
   uploadProgress;
 
-  constructor(private afAuth: AngularFireAuth, private afStorage: AngularFireStorage) { }
+  constructor(
+    private afAuth: AngularFireAuth, 
+    private afStorage: AngularFireStorage, 
+    private db: DbService
+  ) { }
 
   ngOnInit(): void {
     this.userSub = this.afAuth.authState.subscribe((user) => {
       this.user = user;
+      if (this.user) {
+        this.db
+          .readPersonalSpaceByUID(user.uid)
+          .subscribe((data) => {
+            console.log('readPersonalSpaceByUID oninit : ', data);
+            if (!data || data.length === 0) {
+              this.db.createPersonalSpace(this.user);
+            }
+          }, (err) => {
+            console.error('ERROR readPersonalSpaceByUID oninit : ', err);
+          });
+      }
     });
   }
 
@@ -61,9 +78,12 @@ export class PhotoAlbumComponent implements OnInit, OnDestroy {
           this.photoServerURL.subscribe((data) => {
             console.log('data : ', data);
             this.uploadedImgURL = data;
+            this.db.updatePersonalSpacePhotoURLs(this.user, this.uploadedImgURL);
           }); 
         })
       ).subscribe();
+
+      this.photo = {file : '', title: ''};
 
     this.waitingUpload = false;
   }

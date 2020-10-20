@@ -26,19 +26,13 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // Components
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { ContactComponent } from './contact/contact.component';
-import { LocationComponent } from './location/location.component';
 import { PhotoAlbumComponent } from './photo-album/photo-album.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     LoginComponent,
-    ContactComponent,
-    LocationComponent,
     PhotoAlbumComponent
   ],
   imports: [
@@ -46,7 +40,7 @@ import { PhotoAlbumComponent } from './photo-album/photo-album.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireStorageModule,
     MatMenuModule,

@@ -1,8 +1,18 @@
+.card {
+    max-width: 400px;
+    margin: 50px auto;
+}
+
 .uploadPhotoForm {
-    max-width: 300px;
     width: 100%;
     text-align: center;
     margin: auto;
+}
+
+.center {
+    max-width: 400px;
+    margin: 50px auto;
+    text-align: center;
 }
 
 form button {

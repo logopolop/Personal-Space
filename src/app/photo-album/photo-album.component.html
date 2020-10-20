@@ -1,20 +1,32 @@
-<h3>Album Photo</h3>
 
-<div class="uploadPhotoForm">
-    <form #uploadForm="ngForm" (ngSubmit)="postPhoto()">
-        <mat-form-field>
-            <input type="text" matInput name="title" id="title" [(ngModel)]="photo.title" placeholder="Titre de la photo" required>
-        </mat-form-field><br />
-        <input type="file" name="photoToUpload" id="photoToUpload" (change)="onFileChange($event)" required><br />
-        
-        <button mat-raised-button type="submit" color="primary" [disabled]="!uploadForm.valid || uploadProgress ">Valider</button>
-    </form>
-    
+<mat-card class="card mat-elevation-z8">
+    <mat-card-header>
+        <mat-card-title>Album Photo</mat-card-title>
+        <mat-card-subtitle>Ajouter une photo</mat-card-subtitle>
+    </mat-card-header><h3></h3>
+    <mat-card-content>
+        <div class="uploadPhotoForm">
+            <form #uploadForm="ngForm" (ngSubmit)="postPhoto()">
+                <input type="file" name="photoToUpload" id="photoToUpload" (change)="onFileChange($event)" required><br />
+                
+                <mat-form-field>
+                    <input type="text" matInput name="title" id="title" [(ngModel)]="photo.title" placeholder="Titre de la photo" required>
+                </mat-form-field><br />
+                
+                <button mat-raised-button type="submit" color="primary" [disabled]="!uploadForm.valid || uploadProgress ">Valider</button>
+            </form>
+            
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<div class="center">
     <div *ngIf="uploadProgress | async">
         <mat-progress-bar mode="determinate" [value]="(uploadProgress | async)"></mat-progress-bar>
     </div>
-    
+    <br />
     <div *ngIf="photoServerURL | async; let uploadSrc">
-      <a [href]="uploadSrc">Voici la photo que vous venez de mettre en ligne.</a>
+        <a [href]="uploadSrc">Voici la photo que vous venez de mettre en ligne.</a>
     </div>
 </div>
+  
